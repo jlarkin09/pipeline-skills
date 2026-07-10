@@ -141,11 +141,18 @@ judges:
       annotations (exact match or adjacent level).
     check: |
       import json
+      import glob as g
+      import os
 
-      findings_content = outputs.get("main_content", "")
-      if not findings_content.strip():
-          return False, "No finding.json content"
-      data = json.loads(findings_content)
+      findings = g.glob("**/finding.json", root_dir=os.getcwd(), recursive=True)
+      if findings:
+          with open(findings[0]) as f:
+              data = json.load(f)
+      else:
+          findings_content = outputs.get("main_content", "")
+          if not findings_content.strip():
+              return False, "No finding.json found"
+          data = json.loads(findings_content)
 
       expected = annotations.get("confidence_expected")
       if not expected:
@@ -164,18 +171,26 @@ judges:
   - name: resolution_consistency
     description: |
       Check that has_resolution_file in finding.json matches whether
-      resolution.md actually exists.
+      resolution.md actually exists, and matches the case expectation.
     check: |
       import json
       import glob as g
       import os
 
-      findings_content = outputs.get("main_content", "")
-      if not findings_content.strip():
-          return False, "No finding.json content"
-      data = json.loads(findings_content)
+      findings = g.glob("**/finding.json", root_dir=os.getcwd(), recursive=True)
+      if findings:
+          with open(findings[0]) as f:
+              data = json.load(f)
+      else:
+          findings_content = outputs.get("main_content", "")
+          if not findings_content.strip():
+              return False, "No finding.json found"
+          data = json.loads(findings_content)
 
       has_flag = data.get("has_resolution_file", False)
+      expected = annotations.get("has_resolution")
+      if expected is not None and has_flag != expected:
+          return False, f"has_resolution_file={has_flag}, expected {expected}"
       resolution_files = g.glob("**/sections/resolution.md", root_dir=os.getcwd(), recursive=True)
       has_file = bool(resolution_files) and os.path.getsize(resolution_files[0]) > 10
 

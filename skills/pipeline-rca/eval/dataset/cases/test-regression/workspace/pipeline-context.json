@@ -7,6 +7,6 @@
   "source": "schedule",
   "status": "failed",
   "total_jobs": 45,
-  "failed_jobs": 6,
+  "failed_jobs": 2,
   "job_summary": "| Job ID | Job Name | Status | Duration |\n|--------|----------|--------|----------|\n| 9001 | validate-packages-x86-64-core-collection | failed | 48s |\n| 9002 | validate-packages-aarch64-core-collection | failed | 52s |"
 }
