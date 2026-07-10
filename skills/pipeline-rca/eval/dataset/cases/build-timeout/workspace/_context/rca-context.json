@@ -1,0 +1,21 @@
+{
+  "group": {
+    "id": "01-torch-build-timeout",
+    "name": "torch wheel build timed out during compilation",
+    "collections": ["test-collection-2"],
+    "actions": ["build-wheels"],
+    "error_description": "Job exceeded maximum duration of 3600 seconds during torch compilation"
+  },
+  "pipeline": {
+    "project_path": "redhat/rhel-ai/rhai/pipeline",
+    "project_path_encoded": "redhat%2Frhel-ai%2Frhai%2Fpipeline",
+    "ref": "main",
+    "sha": "def456abc789",
+    "builder_project_path": "redhat/rhel-ai/rhai/wheels-builder"
+  },
+  "affected_jobs_table": "| Job ID | Job Name | Collection | Action |\n|--------|----------|------------|--------|\n| 8003 | build-wheels-x86-64-test-collection-2 | test-collection-2 | build-wheels |",
+  "file_paths_table": "| Job Name | Trace Log | Preprocessed Errors |\n|----------|-----------|--------------------|\n| build-wheels-x86-64-test-collection-2 | groups/01-torch-build-timeout/jobs/8003-build-wheels-x86-64-test-collection-2/trace.log | groups/01-torch-build-timeout/jobs/8003-build-wheels-x86-64-test-collection-2/errors.txt |",
+  "dependency_versions": "torch pinned to 2.4.1 in requirements.txt",
+  "repo_submodule_path": "/workspace/_repos/pipeline",
+  "group_dir": "/workspace/groups/01-torch-build-timeout"
+}

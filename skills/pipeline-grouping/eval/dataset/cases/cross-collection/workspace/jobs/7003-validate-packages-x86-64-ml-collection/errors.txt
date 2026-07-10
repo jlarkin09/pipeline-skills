@@ -1,0 +1,12 @@
+2025-07-06T02:55:44Z [validate-packages] Uploading validated packages to staging registry...
+2025-07-06T02:55:45Z [validate-packages] Pushing ml-collection artifacts to registry.redhat.io/rhelai-staging/...
+2025-07-06T02:55:46Z [validate-packages] PUT https://registry.redhat.io/v2/rhelai-staging/ml-collection/manifests/nightly-20250706
+2025-07-06T02:55:51Z [python] Traceback (most recent call last):
+2025-07-06T02:55:51Z [python]   File "/opt/build/scripts/upload_artifacts.py", line 87, in push_to_registry
+2025-07-06T02:55:51Z [python]     response = session.put(url, data=payload, timeout=30)
+2025-07-06T02:55:51Z [python]   File "/usr/lib/python3.11/site-packages/requests/sessions.py", line 602, in put
+2025-07-06T02:55:51Z [python]     return self.request("PUT", url, data=data, **kwargs)
+2025-07-06T02:55:51Z [python] ConnectionResetError: [Errno 104] Connection reset by peer
+2025-07-06T02:55:52Z [validate-packages] ERROR: Failed to upload python artifacts to registry. ConnectionResetError: [Errno 104] Connection reset by peer
+2025-07-06T02:55:52Z [validate-packages] Retried 3 times, all attempts failed
+2025-07-06T02:55:53Z [pipeline] Job 7003 failed after 247s

@@ -1,0 +1,5 @@
+prompt: "/pipeline-rca"
+group_id: "01-jsonschema-import-failure"
+expected_confidence: high
+expected_root_cause: "jsonschema package was removed from ci-requirements.txt but the validate-packages script still imports it"
+expected_has_resolution: true

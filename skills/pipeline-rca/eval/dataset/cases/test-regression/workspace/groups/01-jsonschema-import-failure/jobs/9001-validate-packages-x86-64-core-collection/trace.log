@@ -1,0 +1,39 @@
+2026-07-07T02:45:01.102Z  INFO runner : Job started on runner qe-rhel-x86-64-05
+2026-07-07T02:45:01.245Z  INFO runner : Using docker executor with image registry.gitlab.com/redhat/rhel-ai/rhai/ci-images/validation:latest
+2026-07-07T02:45:01.891Z  INFO runner : Pulling docker image registry.gitlab.com/redhat/rhel-ai/rhai/ci-images/validation:latest ...
+2026-07-07T02:45:06.334Z  INFO runner : Using docker image sha256:b7c9d2e4f6a8 for registry.gitlab.com/redhat/rhel-ai/rhai/ci-images/validation:latest
+2026-07-07T02:45:06.778Z  STEP [1/5] : Preparing environment
+2026-07-07T02:45:07.102Z  INFO : Setting up validation environment for collection core-collection
+2026-07-07T02:45:07.312Z  INFO : Architecture: x86_64
+2026-07-07T02:45:07.314Z  INFO : Python version: 3.11.9
+2026-07-07T02:45:07.718Z  STEP [2/5] : Installing validation dependencies
+2026-07-07T02:45:08.041Z  INFO pip : Requirement already satisfied: pyyaml>=6.0 in /usr/lib/python3.11/site-packages (6.0.2)
+2026-07-07T02:45:08.163Z  INFO pip : Requirement already satisfied: packaging>=24.0 in /usr/lib/python3.11/site-packages (24.1)
+2026-07-07T02:45:08.285Z  INFO pip : Requirement already satisfied: requests>=2.32 in /usr/lib/python3.11/site-packages (2.32.3)
+2026-07-07T02:45:08.820Z  STEP [3/5] : Downloading build artifacts
+2026-07-07T02:45:09.142Z  INFO : Downloading artifacts from build-wheels-x86-64-core-collection (job 8801)
+2026-07-07T02:45:12.456Z  INFO : Downloaded 127 wheel files (2.3 GB)
+2026-07-07T02:45:12.578Z  INFO : Artifact directory: /tmp/validation-artifacts/core-collection/x86_64
+2026-07-07T02:45:12.700Z  STEP [4/5] : Running package validation
+2026-07-07T02:45:12.822Z  INFO : Running validation script: core/scripts/validate-packages.py
+2026-07-07T02:45:12.944Z  INFO : Checking wheel metadata, platform tags, and dependency completeness
+2026-07-07T02:45:13.066Z  INFO : Validating 127 packages against requirements.txt
+2026-07-07T02:45:13.188Z  INFO : Python: /usr/bin/python3.11
+2026-07-07T02:45:13.310Z  INFO : Command: python3 core/scripts/validate-packages.py --wheels-dir /tmp/validation-artifacts/core-collection/x86_64 --requirements requirements.txt --collection core-collection
+2026-07-07T02:45:13.432Z  INFO :
+2026-07-07T02:45:13.554Z  Traceback (most recent call last):
+2026-07-07T02:45:13.676Z    File "/workspace/core/scripts/validate-packages.py", line 3, in <module>
+2026-07-07T02:45:13.798Z      import sys
+2026-07-07T02:45:13.920Z    File "/workspace/core/scripts/validate-packages.py", line 5, in <module>
+2026-07-07T02:45:14.042Z      from pathlib import Path
+2026-07-07T02:45:14.164Z    File "/workspace/core/scripts/validate-packages.py", line 8, in <module>
+2026-07-07T02:45:14.286Z      import jsonschema
+2026-07-07T02:45:14.408Z      ^^^^^^^^^^^^^^^^^^^
+2026-07-07T02:45:14.530Z  ModuleNotFoundError: No module named 'jsonschema'
+2026-07-07T02:45:14.652Z
+2026-07-07T02:45:14.774Z  ERROR: Package validation script failed with exit code 1
+2026-07-07T02:45:14.896Z  ERROR: validate-packages step failed for core-collection (x86_64)
+2026-07-07T02:45:15.018Z  STEP [5/5] : Cleanup
+2026-07-07T02:45:15.140Z  INFO runner : Cleaning up project directory and file based variables
+2026-07-07T02:45:15.262Z  ERROR runner : Job failed: exit code 1
+2026-07-07T02:45:15.384Z  INFO runner : Job duration: 00:00:48

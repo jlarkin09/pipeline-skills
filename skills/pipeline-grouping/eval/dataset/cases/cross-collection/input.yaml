@@ -1,0 +1,7 @@
+prompt: "/pipeline-grouping"
+expected_groups: 2
+expected_grouping:
+  - root_cause: "OpenSSL linking failure in cryptography build"
+    job_ids: ["7001", "7002", "7004", "7005"]
+  - root_cause: "Registry upload connection failure"
+    job_ids: ["7003", "7006"]

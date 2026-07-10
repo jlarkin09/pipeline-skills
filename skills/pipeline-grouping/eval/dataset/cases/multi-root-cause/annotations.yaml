@@ -1,0 +1,5 @@
+difficulty: medium
+expected_group_count: 3
+expected_jobs: "8001,8002,8003,8004,8005,8006"
+tests_boundary_crossing: false
+has_cascade: true

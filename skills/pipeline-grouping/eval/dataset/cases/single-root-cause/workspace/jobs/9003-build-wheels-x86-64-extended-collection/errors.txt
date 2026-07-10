@@ -1,0 +1,9 @@
+2025-07-06T04:12:07Z [build-wheels] Installing dependencies for extended-collection (x86_64)...
+2025-07-06T04:12:08Z [pip] Collecting transformers==4.45.2
+2025-07-06T04:12:09Z [pip] Collecting tokenizers>=0.20,<0.21 (from transformers==4.45.2)
+2025-07-06T04:12:09Z [pip] WARNING: tokenizers 0.19.1 is already installed but transformers 4.45.2 requires tokenizers>=0.20,<0.21
+2025-07-06T04:12:10Z [pip] ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. Package 'transformers' requires 'tokenizers>=0.20,<0.21' but version 0.19.1 is installed.
+2025-07-06T04:12:10Z [pip] ERROR: Cannot install transformers==4.45.2 with satisfied dependencies.
+2025-07-06T04:12:11Z [build-wheels] Dependency resolution failed for extended-collection
+2025-07-06T04:12:11Z [build-wheels] pip install exited with code 1
+2025-07-06T04:12:12Z [pipeline] Job 9003 failed after 211s

@@ -1,0 +1,12 @@
+2025-07-06T02:34:22Z [build-wheels] Building cryptography wheel for ml-collection (aarch64)...
+2025-07-06T02:34:23Z [build-wheels] Running setup.py bdist_wheel for cryptography...
+2025-07-06T02:34:24Z [gcc] compiling _openssl.c
+2025-07-06T02:34:29Z [gcc] _openssl.c:3421:10: fatal error: openssl/opensslv.h: No such file or directory
+2025-07-06T02:34:29Z [gcc]  #include <openssl/opensslv.h>
+2025-07-06T02:34:29Z [gcc]           ^~~~~~~~~~~~~~~~~~~~
+2025-07-06T02:34:30Z [ld] ld: library not found for -lssl
+2025-07-06T02:34:30Z [ld] ld: library not found for -lcrypto
+2025-07-06T02:34:30Z [build-wheels] error: could not compile 'cryptography'. ld: library not found for -lssl
+2025-07-06T02:34:31Z [build-wheels] ERROR: Failed building wheel for cryptography
+2025-07-06T02:34:31Z [build-wheels] Hint: ensure openssl-devel is installed in the build container image
+2025-07-06T02:34:32Z [pipeline] Job 7002 failed after 305s

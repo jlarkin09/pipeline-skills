@@ -1,0 +1,73 @@
+2026-07-07T02:05:12.103Z  INFO runner : Job started on runner qe-rhel-x86-64-03
+2026-07-07T02:05:12.241Z  INFO runner : Using docker executor with image registry.gitlab.com/redhat/rhel-ai/rhai/ci-images/wheels-builder:latest
+2026-07-07T02:05:13.017Z  INFO runner : Pulling docker image registry.gitlab.com/redhat/rhel-ai/rhai/ci-images/wheels-builder:latest ...
+2026-07-07T02:05:18.442Z  INFO runner : Using docker image sha256:a4b8c3d1e5f6 for registry.gitlab.com/redhat/rhel-ai/rhai/ci-images/wheels-builder:latest
+2026-07-07T02:05:18.891Z  STEP [1/8] : Preparing environment
+2026-07-07T02:05:19.203Z  INFO : Setting up build environment for collection test-collection-1
+2026-07-07T02:05:19.415Z  INFO : Architecture: x86_64
+2026-07-07T02:05:19.416Z  INFO : Python version: 3.11.9
+2026-07-07T02:05:19.820Z  STEP [2/8] : Restoring cache
+2026-07-07T02:05:22.117Z  INFO : Cache restored from wheels-x86-64-test-collection-1-abc123de
+2026-07-07T02:05:22.340Z  STEP [3/8] : Loading build configuration
+2026-07-07T02:05:22.558Z  INFO fromager.config : Loading collection configuration
+2026-07-07T02:05:22.672Z  INFO fromager.config : Collection: test-collection-1
+2026-07-07T02:05:22.783Z  INFO fromager.config : Constraints file: core/constraints/x86_64.txt
+2026-07-07T02:05:22.891Z  INFO fromager.config : Requirements file: requirements.txt
+2026-07-07T02:05:23.012Z  INFO fromager.config : Loaded 127 package requirements
+2026-07-07T02:05:23.130Z  INFO fromager.config : Loaded 84 version constraints
+2026-07-07T02:05:23.245Z  STEP [4/8] : Resolving dependencies
+2026-07-07T02:05:23.367Z  INFO fromager.resolver : Starting dependency resolution for test-collection-1
+2026-07-07T02:05:23.489Z  INFO fromager.resolver : Processing top-level requirements...
+2026-07-07T02:05:25.712Z  INFO fromager.resolver : Resolved 312 packages in dependency tree
+2026-07-07T02:05:25.834Z  STEP [5/8] : Building wheels
+2026-07-07T02:05:25.956Z  INFO fromager.wheels : Starting wheel builds for test-collection-1 (x86_64)
+2026-07-07T02:05:26.078Z  INFO fromager.wheels : Build order: 312 packages
+2026-07-07T02:05:26.200Z  INFO fromager.wheels : [1/312] Building wheel for packaging==24.1
+2026-07-07T02:05:28.443Z  INFO fromager.wheels : [1/312] Built packaging-24.1-py3-none-any.whl (OK, 1.2s)
+2026-07-07T02:05:28.565Z  INFO fromager.wheels : [2/312] Building wheel for setuptools==72.1.0
+2026-07-07T02:05:32.108Z  INFO fromager.wheels : [2/312] Built setuptools-72.1.0-py3-none-any.whl (OK, 3.5s)
+2026-07-07T02:05:32.230Z  INFO fromager.wheels : [3/312] Building wheel for cython==3.0.11
+2026-07-07T02:05:48.672Z  INFO fromager.wheels : [3/312] Built cython-3.0.11-cp311-cp311-linux_x86_64.whl (OK, 16.4s)
+2026-07-07T02:05:48.794Z  INFO fromager.wheels : [4/312] Building wheel for numpy==1.26.4
+2026-07-07T02:05:48.916Z  INFO fromager.wheels : Downloading numpy-1.26.4.tar.gz from PyPI
+2026-07-07T02:05:51.238Z  INFO fromager.wheels : Downloaded numpy-1.26.4.tar.gz (15.8 MB)
+2026-07-07T02:05:51.360Z  INFO fromager.wheels : Unpacking source distribution...
+2026-07-07T02:05:52.482Z  INFO fromager.wheels : Installing build dependencies for numpy==1.26.4
+2026-07-07T02:05:52.604Z  INFO pip : Processing /tmp/fromager-build-xKj3Qp/numpy
+2026-07-07T02:05:52.726Z  INFO pip : Installing build dependencies: started
+2026-07-07T02:05:53.848Z  INFO pip : Collecting numpy>=2.0.0 (from constraints: core/constraints/x86_64.txt)
+2026-07-07T02:05:53.970Z  INFO pip :   Using cached numpy-2.1.0-cp311-cp311-manylinux_2_17_x86_64.whl
+2026-07-07T02:05:54.092Z  INFO pip : Requirement already specified: numpy==1.26.4 (from requirements.txt)
+2026-07-07T02:05:54.214Z  ERROR pip : ERROR: Cannot install numpy==1.26.4 because these package versions have conflicting dependencies.
+2026-07-07T02:05:54.336Z  ERROR pip : ResolutionImpossible: for help visit https://pip.pypa.io/en/latest/topics/dependency-resolution/
+2026-07-07T02:05:54.458Z  ERROR pip :
+2026-07-07T02:05:54.580Z  ERROR pip : The conflict is caused by:
+2026-07-07T02:05:54.702Z  ERROR pip :     The user requested numpy==1.26.4
+2026-07-07T02:05:54.824Z  ERROR pip :     The constraint file requires numpy>=2.0.0
+2026-07-07T02:05:54.946Z  ERROR pip :
+2026-07-07T02:05:55.068Z  ERROR pip : To fix this you could try to:
+2026-07-07T02:05:55.190Z  ERROR pip : 1. loosen the range of package versions you've specified
+2026-07-07T02:05:55.312Z  ERROR pip : 2. remove package versions to allow pip to attempt to solve the dependency conflict
+2026-07-07T02:05:55.434Z  ERROR pip :
+2026-07-07T02:05:55.556Z  ERROR pip : pip subprocess to install requirements (from constraints) did not run successfully.
+2026-07-07T02:05:55.678Z  ERROR pip :   exit code: 1
+2026-07-07T02:05:55.800Z  ERROR pip :   Working directory: /tmp/fromager-build-xKj3Qp/numpy
+2026-07-07T02:05:55.922Z  ERROR pip :
+2026-07-07T02:05:56.044Z  ERROR pip : ERROR: pip subprocess to install build dependencies exited with 1
+2026-07-07T02:05:56.166Z  ERROR fromager.wheels : Failed to build wheel for numpy==1.26.4 from source
+2026-07-07T02:05:56.288Z  ERROR fromager.wheels :   collection=test-collection-1
+2026-07-07T02:05:56.410Z  ERROR fromager.wheels :   variant=x86_64
+2026-07-07T02:05:56.532Z  ERROR fromager.wheels :   error=RequirementsBuildError
+2026-07-07T02:05:56.654Z  ERROR fromager.wheels :   constraint_file=core/constraints/x86_64.txt
+2026-07-07T02:05:56.776Z  CRITICAL fromager.wheels : Build failed — aborting remaining builds for test-collection-1
+2026-07-07T02:05:56.898Z  INFO fromager.wheels : Skipping remaining 308 packages due to critical failure
+2026-07-07T02:05:57.020Z  STEP [6/8] : Collecting artifacts
+2026-07-07T02:05:57.142Z  WARN fromager.artifacts : No wheels produced for test-collection-1 — build failed at numpy==1.26.4
+2026-07-07T02:05:57.264Z  INFO fromager.artifacts : Built 3 of 312 wheels before failure
+2026-07-07T02:05:57.386Z  STEP [7/8] : Uploading artifacts
+2026-07-07T02:05:57.508Z  INFO runner : Uploading artifacts for job 8001...
+2026-07-07T02:05:58.630Z  INFO runner : Uploading artifacts as "build-logs" to coordinator... ok
+2026-07-07T02:05:58.752Z  STEP [8/8] : Cleanup
+2026-07-07T02:05:58.874Z  INFO runner : Cleaning up project directory and file based variables
+2026-07-07T02:05:59.096Z  ERROR runner : Job failed: exit code 1
+2026-07-07T02:05:59.218Z  INFO runner : Job duration: 00:05:42

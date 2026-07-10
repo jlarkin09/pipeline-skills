@@ -1,0 +1,5 @@
+prompt: "/pipeline-rca"
+group_id: "01-numpy-constraint-conflict"
+expected_confidence: high
+expected_root_cause: "numpy version constraint conflict between requirements.txt pinning 1.26.4 and constraints file requiring >=2.0.0"
+expected_has_resolution: true

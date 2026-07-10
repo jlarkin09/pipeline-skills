@@ -1,0 +1,21 @@
+{
+  "group": {
+    "id": "01-numpy-constraint-conflict",
+    "name": "numpy version constraint conflict blocks wheel builds",
+    "collections": ["test-collection-1"],
+    "actions": ["build-wheels"],
+    "error_description": "Cannot install numpy==1.26.4 due to conflicting version constraints"
+  },
+  "pipeline": {
+    "project_path": "redhat/rhel-ai/rhai/pipeline",
+    "project_path_encoded": "redhat%2Frhel-ai%2Frhai%2Fpipeline",
+    "ref": "main",
+    "sha": "abc123def456",
+    "builder_project_path": "redhat/rhel-ai/rhai/wheels-builder"
+  },
+  "affected_jobs_table": "| Job ID | Job Name | Collection | Action |\n|--------|----------|------------|--------|\n| 8001 | build-wheels-x86-64-test-collection-1 | test-collection-1 | build-wheels |\n| 8002 | build-wheels-aarch64-test-collection-1 | test-collection-1 | build-wheels |",
+  "file_paths_table": "| Job Name | Trace Log | Preprocessed Errors |\n|----------|-----------|--------------------|\n| build-wheels-x86-64-test-collection-1 | groups/01-numpy-constraint-conflict/jobs/8001-build-wheels-x86-64-test-collection-1/trace.log | groups/01-numpy-constraint-conflict/jobs/8001-build-wheels-x86-64-test-collection-1/errors.txt |\n| build-wheels-aarch64-test-collection-1 | groups/01-numpy-constraint-conflict/jobs/8002-build-wheels-aarch64-test-collection-1/trace.log | groups/01-numpy-constraint-conflict/jobs/8002-build-wheels-aarch64-test-collection-1/errors.txt |",
+  "dependency_versions": "numpy pinned to 1.26.4 in requirements.txt, constraint numpy>=2.0.0 in core/constraints/x86_64.txt",
+  "repo_submodule_path": "/workspace/_repos/pipeline",
+  "group_dir": "/workspace/groups/01-numpy-constraint-conflict"
+}

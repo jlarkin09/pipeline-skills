@@ -1,0 +1,9 @@
+2025-07-06T04:05:14Z [build-wheels] Installing dependencies for core-collection (x86_64)...
+2025-07-06T04:05:15Z [pip] Collecting transformers==4.45.2
+2025-07-06T04:05:16Z [pip] Collecting tokenizers>=0.20,<0.21 (from transformers==4.45.2)
+2025-07-06T04:05:16Z [pip] WARNING: tokenizers 0.19.1 is already installed but transformers 4.45.2 requires tokenizers>=0.20,<0.21
+2025-07-06T04:05:17Z [pip] ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. Package 'transformers' requires 'tokenizers>=0.20,<0.21' but version 0.19.1 is installed.
+2025-07-06T04:05:17Z [pip] ERROR: Cannot install transformers==4.45.2 with satisfied dependencies.
+2025-07-06T04:05:18Z [build-wheels] Dependency resolution failed for core-collection
+2025-07-06T04:05:18Z [build-wheels] pip install exited with code 1
+2025-07-06T04:05:19Z [pipeline] Job 9001 failed after 203s

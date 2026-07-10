@@ -1,0 +1,125 @@
+name: Eval
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'skills/**'
+
+  workflow_dispatch:
+    inputs:
+      skill:
+        description: 'Skill to evaluate (blank = all)'
+        required: false
+        type: string
+      model:
+        description: 'Model for skill execution'
+        required: false
+        default: 'sonnet'
+        type: string
+      runs:
+        description: 'Number of eval runs per case'
+        required: false
+        default: '1'
+        type: string
+
+jobs:
+  eval-grouping:
+    runs-on: ubuntu-latest
+    if: >-
+      github.event_name == 'workflow_dispatch' && (inputs.skill == '' || inputs.skill == 'pipeline-grouping')
+      || github.event_name == 'pull_request'
+    permissions:
+      contents: read
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      with:
+        persist-credentials: false
+
+    - name: Set up Python
+      uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6
+      with:
+        python-version: '3.13'
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@fac544c07dec837d0ccb6301d7b5580bf5edae39 # v8.2.0
+      with:
+        enable-cache: true
+
+    - name: Install eval harness
+      run: |
+        uv pip install --system pyyaml
+        git clone --depth 1 https://github.com/opendatahub-io/agent-eval-harness /tmp/eval-harness
+        uv pip install --system -e /tmp/eval-harness
+
+    - name: Install Claude Code
+      run: npm install -g @anthropic-ai/claude-code
+
+    - name: Run pipeline-grouping eval
+      run: |
+        cd skills/pipeline-grouping
+        echo "/eval-run --model ${{ inputs.model || 'sonnet' }} --runs ${{ inputs.runs || '1' }}" | \
+          claude --print --plugin-dir /tmp/eval-harness
+      timeout-minutes: 30
+
+    - name: Upload eval results
+      if: always()
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      with:
+        name: eval-results-grouping
+        path: skills/pipeline-grouping/eval/results/
+        if-no-files-found: ignore
+
+  eval-rca:
+    runs-on: ubuntu-latest
+    if: >-
+      github.event_name == 'workflow_dispatch' && (inputs.skill == '' || inputs.skill == 'pipeline-rca')
+      || github.event_name == 'pull_request'
+    permissions:
+      contents: read
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      with:
+        persist-credentials: false
+
+    - name: Set up Python
+      uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6
+      with:
+        python-version: '3.13'
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@fac544c07dec837d0ccb6301d7b5580bf5edae39 # v8.2.0
+      with:
+        enable-cache: true
+
+    - name: Install eval harness
+      run: |
+        uv pip install --system pyyaml
+        git clone --depth 1 https://github.com/opendatahub-io/agent-eval-harness /tmp/eval-harness
+        uv pip install --system -e /tmp/eval-harness
+
+    - name: Install Claude Code
+      run: npm install -g @anthropic-ai/claude-code
+
+    - name: Run pipeline-rca eval
+      run: |
+        cd skills/pipeline-rca
+        echo "/eval-run --model ${{ inputs.model || 'sonnet' }} --runs ${{ inputs.runs || '1' }}" | \
+          claude --print --plugin-dir /tmp/eval-harness
+      timeout-minutes: 30
+
+    - name: Upload eval results
+      if: always()
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      with:
+        name: eval-results-rca
+        path: skills/pipeline-rca/eval/results/
+        if-no-files-found: ignore

@@ -1,0 +1,76 @@
+2026-07-07T04:05:08.114Z  INFO runner : Job started on runner qe-rhel-x86-64-07
+2026-07-07T04:05:08.256Z  INFO runner : Using docker executor with image registry.gitlab.com/redhat/rhel-ai/rhai/ci-images/wheels-builder:latest
+2026-07-07T04:05:08.891Z  INFO runner : Pulling docker image registry.gitlab.com/redhat/rhel-ai/rhai/ci-images/wheels-builder:latest ...
+2026-07-07T04:05:14.223Z  INFO runner : Using docker image sha256:a4b8c3d1e5f6 for registry.gitlab.com/redhat/rhel-ai/rhai/ci-images/wheels-builder:latest
+2026-07-07T04:05:14.667Z  STEP [1/8] : Preparing environment
+2026-07-07T04:05:14.992Z  INFO : Setting up build environment for collection test-collection-2
+2026-07-07T04:05:15.104Z  INFO : Architecture: x86_64
+2026-07-07T04:05:15.106Z  INFO : Python version: 3.11.9
+2026-07-07T04:05:15.518Z  STEP [2/8] : Restoring cache
+2026-07-07T04:05:18.841Z  INFO : Cache restored from wheels-x86-64-test-collection-2-def456ab
+2026-07-07T04:05:19.063Z  STEP [3/8] : Loading build configuration
+2026-07-07T04:05:19.288Z  INFO fromager.config : Loading collection configuration
+2026-07-07T04:05:19.401Z  INFO fromager.config : Collection: test-collection-2
+2026-07-07T04:05:19.514Z  INFO fromager.config : Constraints file: core/constraints/x86_64.txt
+2026-07-07T04:05:19.627Z  INFO fromager.config : Requirements file: requirements.txt
+2026-07-07T04:05:19.740Z  INFO fromager.config : Loaded 142 package requirements
+2026-07-07T04:05:19.853Z  INFO fromager.config : Loaded 84 version constraints
+2026-07-07T04:05:19.966Z  STEP [4/8] : Resolving dependencies
+2026-07-07T04:05:20.079Z  INFO fromager.resolver : Starting dependency resolution for test-collection-2
+2026-07-07T04:05:20.192Z  INFO fromager.resolver : Processing top-level requirements...
+2026-07-07T04:05:23.505Z  INFO fromager.resolver : Resolved 387 packages in dependency tree
+2026-07-07T04:05:23.618Z  STEP [5/8] : Building wheels
+2026-07-07T04:05:23.731Z  INFO fromager.wheels : Starting wheel builds for test-collection-2 (x86_64)
+2026-07-07T04:05:23.844Z  INFO fromager.wheels : Build order: 387 packages
+2026-07-07T04:05:23.957Z  INFO fromager.wheels : [1/387] Building wheel for packaging==24.1
+2026-07-07T04:05:26.270Z  INFO fromager.wheels : [1/387] Built packaging-24.1-py3-none-any.whl (OK, 2.3s)
+2026-07-07T04:05:26.383Z  INFO fromager.wheels : [2/387] Building wheel for setuptools==72.1.0
+2026-07-07T04:05:30.696Z  INFO fromager.wheels : [2/387] Built setuptools-72.1.0-py3-none-any.whl (OK, 4.3s)
+2026-07-07T04:05:30.809Z  INFO fromager.wheels : [3/387] Building wheel for numpy==2.0.2
+2026-07-07T04:06:12.122Z  INFO fromager.wheels : [3/387] Built numpy-2.0.2-cp311-cp311-linux_x86_64.whl (OK, 41.3s)
+2026-07-07T04:06:12.235Z  INFO fromager.wheels : [4/387] Building wheel for pyyaml==6.0.2
+2026-07-07T04:06:18.548Z  INFO fromager.wheels : [4/387] Built pyyaml-6.0.2-cp311-cp311-linux_x86_64.whl (OK, 6.3s)
+2026-07-07T04:06:18.661Z  INFO fromager.wheels : [5/387] Building wheel for torch==2.4.1
+2026-07-07T04:06:18.774Z  INFO fromager.wheels : Downloading torch-2.4.1.tar.gz from PyPI
+2026-07-07T04:06:32.087Z  INFO fromager.wheels : Downloaded torch-2.4.1.tar.gz (389.7 MB)
+2026-07-07T04:06:38.400Z  INFO fromager.wheels : Unpacking source distribution...
+2026-07-07T04:06:45.713Z  INFO fromager.wheels : Installing build dependencies for torch==2.4.1
+2026-07-07T04:07:02.026Z  INFO pip : Successfully installed cmake-3.30.1 ninja-1.11.1.1 pyyaml-6.0.2
+2026-07-07T04:07:02.139Z  INFO fromager.wheels : Running cmake configuration for torch...
+2026-07-07T04:07:02.252Z  INFO cmake : -- The CXX compiler identification is GNU 12.3.0
+2026-07-07T04:07:02.365Z  INFO cmake : -- The C compiler identification is GNU 12.3.0
+2026-07-07T04:07:03.478Z  INFO cmake : -- Detecting CXX compiler ABI info - done
+2026-07-07T04:07:04.591Z  INFO cmake : -- Found Python3: /usr/bin/python3.11
+2026-07-07T04:07:06.904Z  INFO cmake : -- Found CUDA: /usr/local/cuda-12.4 (found version "12.4")
+2026-07-07T04:07:07.017Z  INFO cmake : -- CUDA architectures: 7.0;7.5;8.0;8.6;8.9;9.0
+2026-07-07T04:07:08.130Z  INFO cmake : -- Found cuDNN: /usr/local/cuda-12.4/lib64/libcudnn.so (found version "9.1.0")
+2026-07-07T04:07:09.243Z  INFO cmake : -- Found NCCL: /usr/local/cuda-12.4/lib64/libnccl.so (found version "2.22.3")
+2026-07-07T04:07:12.556Z  INFO cmake : -- BUILD_CAFFE2=ON
+2026-07-07T04:07:12.669Z  INFO cmake : -- BUILD_CAFFE2_OPS=ON
+2026-07-07T04:07:12.782Z  INFO cmake : -- USE_CUDA=ON
+2026-07-07T04:07:12.895Z  INFO cmake : -- USE_CUDNN=ON
+2026-07-07T04:07:13.008Z  INFO cmake : -- USE_NCCL=ON
+2026-07-07T04:07:13.121Z  INFO cmake : -- TORCH_CUDA_ARCH_LIST=7.0;7.5;8.0;8.6;8.9;9.0
+2026-07-07T04:07:18.434Z  INFO cmake : -- Configuring done (76.2s)
+2026-07-07T04:07:19.547Z  INFO cmake : -- Generating done (1.1s)
+2026-07-07T04:07:19.660Z  INFO cmake : -- Build files have been written to: /tmp/fromager-build-Tn8mWz/torch/build
+2026-07-07T04:07:19.773Z  INFO fromager.wheels : Starting ninja build (5312 targets)...
+2026-07-07T04:07:19.886Z  INFO ninja : [1/5312] Building CXX object c10/CMakeFiles/c10.dir/core/Allocator.cpp.o
+2026-07-07T04:07:20.999Z  INFO ninja : [2/5312] Building CXX object c10/CMakeFiles/c10.dir/core/CPUAllocator.cpp.o
+2026-07-07T04:07:22.112Z  INFO ninja : [3/5312] Building CXX object c10/CMakeFiles/c10.dir/core/DefaultDtype.cpp.o
+2026-07-07T04:07:24.425Z  INFO ninja : [8/5312] Building CXX object c10/CMakeFiles/c10.dir/core/DeviceType.cpp.o
+2026-07-07T04:07:38.738Z  INFO ninja : [42/5312] Building CXX object c10/CMakeFiles/c10.dir/core/TensorImpl.cpp.o
+2026-07-07T04:08:12.051Z  INFO ninja : [127/5312] Building CXX object c10/CMakeFiles/c10_cuda.dir/cuda/CUDACachingAllocator.cpp.o
+2026-07-07T04:09:45.364Z  INFO ninja : [384/5312] Building CXX object caffe2/CMakeFiles/torch_cpu.dir/aten/src/ATen/native/cpu/BinaryOpsKernel.cpp.o
+2026-07-07T04:12:18.677Z  INFO ninja : [712/5312] Building CXX object caffe2/CMakeFiles/torch_cpu.dir/aten/src/ATen/native/cpu/UnaryOpsKernel.cpp.o
+2026-07-07T04:16:51.990Z  INFO ninja : [1203/5312] Building CXX object caffe2/CMakeFiles/torch_cpu.dir/aten/src/ATen/native/quantized/cpu/qconv.cpp.o
+2026-07-07T04:22:25.303Z  INFO ninja : [1687/5312] Building CUDA object caffe2/CMakeFiles/torch_cuda.dir/aten/src/ATen/native/cuda/Indexing.cu.o
+2026-07-07T04:30:58.616Z  INFO ninja : [2104/5312] Building CUDA object caffe2/CMakeFiles/torch_cuda.dir/aten/src/ATen/native/cuda/Loss.cu.o
+2026-07-07T04:42:31.929Z  INFO ninja : [2321/5312] Building CUDA object caffe2/CMakeFiles/torch_cuda.dir/aten/src/ATen/native/cuda/SoftMax.cu.o
+2026-07-07T04:55:05.242Z  INFO ninja : [2445/5312] Building CXX object caffe2/CMakeFiles/torch_cpu.dir/serialize/inline_container.cc.o
+2026-07-07T04:57:38.555Z  INFO ninja : [2478/5312] Building CXX object caffe2/CMakeFiles/torch_cpu.dir/core/dispatch/OperatorEntry.cpp.o
+2026-07-07T04:59:11.868Z  INFO ninja : [2488/5312] Building CXX object caffe2/CMakeFiles/torch_cpu.dir/core/GeneratorForPrivateuseone.cpp.o
+2026-07-07T05:01:45.181Z  INFO ninja : [2490/5312] Building CXX object caffe2/CMakeFiles/torch_cpu.dir/core/impl/DeviceGuardImplInterface.cpp.o
+2026-07-07T05:05:08.114Z  ERROR runner : Job exceeded maximum allowed duration (3600 seconds)
+2026-07-07T05:05:08.227Z  ERROR runner : Job failed (system failure): runner terminated job due to timeout
+2026-07-07T05:05:08.340Z  INFO runner : Job duration: 01:00:00

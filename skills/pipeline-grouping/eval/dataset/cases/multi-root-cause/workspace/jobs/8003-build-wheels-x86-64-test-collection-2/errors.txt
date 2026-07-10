@@ -1,0 +1,10 @@
+2025-07-06T03:18:11Z [build-wheels] Running pre-build validation for test-collection-2...
+2025-07-06T03:18:12Z [build-wheels] Validating schema for component manifests...
+2025-07-06T03:18:12Z [python] Traceback (most recent call last):
+2025-07-06T03:18:12Z [python]   File "/opt/build/scripts/validate_manifest.py", line 14, in <module>
+2025-07-06T03:18:12Z [python]     import jsonschema
+2025-07-06T03:18:12Z [python] ModuleNotFoundError: No module named 'jsonschema'
+2025-07-06T03:18:13Z [build-wheels] Manifest validation failed — missing dependency
+2025-07-06T03:18:13Z [build-wheels] Ensure jsonschema is listed in build-requirements.txt
+2025-07-06T03:18:14Z [build-wheels] Pre-build validation failed with exit code 1
+2025-07-06T03:18:14Z [pipeline] Job 8003 failed after 97s

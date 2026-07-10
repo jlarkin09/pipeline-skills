@@ -1,0 +1,5 @@
+prompt: "/pipeline-grouping"
+expected_groups: 1
+expected_grouping:
+  - root_cause: "tokenizers version incompatible with transformers"
+    job_ids: ["9001", "9002", "9003", "9004"]
