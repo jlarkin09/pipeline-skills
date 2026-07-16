@@ -1,0 +1,10 @@
+difficulty: hard
+expected_group_count: 2
+expected_jobs: "7001,7002,7003,7004,7005,7006"
+tests_boundary_crossing: true
+has_cascade: false
+expected_grouping:
+  - root_cause: "OpenSSL linking failure in cryptography build"
+    job_ids: ["7001", "7002", "7004", "7005"]
+  - root_cause: "Registry upload connection failure"
+    job_ids: ["7003", "7006"]

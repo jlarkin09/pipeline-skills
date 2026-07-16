@@ -1,0 +1,9 @@
+[Fallback: last 200 lines of cleaned log]
+2025-07-06T03:46:11Z [release-tarball] Checking for upstream build artifacts...
+2025-07-06T03:46:12Z [release-tarball] Looking for wheels from job build-wheels-aarch64-test-collection-1 (8002)...
+2025-07-06T03:46:12Z [release-tarball] WARNING: Upstream job 8002 status: FAILED
+2025-07-06T03:46:13Z [release-tarball] ERROR: No artifacts found for upload. Build step failed, skipping release.
+2025-07-06T03:46:13Z [release-tarball] Expected artifacts at: /workspace/artifacts/test-collection-1/aarch64/*.whl
+2025-07-06T03:46:14Z [release-tarball] Found 0 files matching pattern
+2025-07-06T03:46:14Z [release-tarball] Cannot proceed with release — upstream build must succeed first
+2025-07-06T03:46:15Z [pipeline] Job 8005 failed after 38s

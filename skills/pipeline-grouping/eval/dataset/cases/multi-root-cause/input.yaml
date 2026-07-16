@@ -1,9 +1,0 @@
-prompt: "/pipeline-grouping"
-expected_groups: 3
-expected_grouping:
-  - root_cause: "numpy version constraint conflict"
-    job_ids: ["8001", "8002"]
-  - root_cause: "missing jsonschema module"
-    job_ids: ["8003", "8006"]
-  - root_cause: "cascade from build failure - no artifacts"
-    job_ids: ["8004", "8005"]

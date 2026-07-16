@@ -1,5 +1,0 @@
-difficulty: easy
-expected_group_count: 1
-expected_jobs: "9001,9002,9003,9004"
-tests_boundary_crossing: false
-has_cascade: false

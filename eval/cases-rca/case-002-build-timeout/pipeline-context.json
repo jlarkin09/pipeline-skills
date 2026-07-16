@@ -1,0 +1,12 @@
+{
+  "pipeline_id": 2641771702,
+  "project_path": "redhat/rhel-ai/rhai/pipeline",
+  "ref": "main",
+  "sha": "def456abc789",
+  "created_at": "2026-07-07T02:00:00Z",
+  "source": "schedule",
+  "status": "failed",
+  "total_jobs": 45,
+  "failed_jobs": 6,
+  "job_summary": "| Job ID | Job Name | Status | Duration |\n|--------|----------|--------|----------|\n| 8003 | build-wheels-x86-64-test-collection-2 | failed | 3600s |"
+}

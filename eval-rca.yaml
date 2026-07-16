@@ -1,0 +1,217 @@
+name: pipeline-rca-eval
+description: >-
+  Evaluate the pipeline-rca skill against realistic CI/CD failure groups.
+  Tests root cause identification, section file generation, finding.json
+  schema validity, and analysis quality across different failure types.
+skill: pipeline-rca
+
+execution:
+  mode: case
+  arguments: "{prompt}"
+  timeout: 900
+
+runner:
+  type: claude-code
+
+models:
+  skill: claude-sonnet-4-6
+  judge: claude-sonnet-4-6
+
+dataset:
+  path: eval/cases-rca
+  schema: |
+    Each case directory contains:
+    - input.yaml: The 'prompt' field is the skill invocation command.
+    - annotations.yaml: Expected outcomes (confidence, resolution,
+      cascade, consistency) used by judges but not copied to workspace.
+    - reference.md: Gold standard analysis for comparison scoring.
+    - _context/rca-context.json: Group metadata, pipeline info,
+      affected jobs table, file paths table.
+    - groups/<group_id>/jobs/<id>-<name>/: Job directories with
+      trace.log and errors.txt files.
+    - pipeline-context.json: Pipeline metadata.
+  workspace:
+    files:
+      - _context
+      - groups
+      - pipeline-context.json
+
+outputs:
+  - path: groups
+    schema: |
+      The skill produces files inside the group directory:
+      - finding.json: Structured finding with root cause analysis metadata.
+      - sections/error-overview.md: Error symptom narrative with quoted
+        error messages.
+      - sections/root-cause.md: Diagnosis explaining why the error occurred.
+      - sections/resolution.md: Suggested fix (optional, depends on case).
+      - sections/feedback.md: Workflow observations (optional).
+
+traces:
+  stdout: true
+  stderr: true
+  metrics: true
+
+judges:
+  - name: finding_schema
+    description: |
+      Validate finding.json against the required schema fields and
+      enum constraints.
+    check: |
+      import json
+      import glob as g
+      import os
+
+      findings = g.glob("**/finding.json", root_dir=os.getcwd(), recursive=True)
+      if not findings:
+          content = outputs.get("main_content", "")
+          if not content.strip():
+              return False, "No finding.json found"
+          try:
+              data = json.loads(content)
+          except json.JSONDecodeError as e:
+              return False, f"Invalid JSON: {e}"
+      else:
+          with open(findings[0]) as f:
+              data = json.load(f)
+
+      required = [
+          "group_id", "title", "collections", "error_summary",
+          "suggested_resolution_summary", "has_resolution_file",
+          "confidence", "confidence_justification", "cascade",
+          "group_consistency", "feedback_status", "references",
+          "resources_used"
+      ]
+      missing = [f for f in required if f not in data]
+      if missing:
+          return False, f"Missing required fields: {', '.join(missing)}"
+
+      if data["confidence"] not in ("high", "medium", "low"):
+          return False, f"Invalid confidence: {data['confidence']}"
+      if data["group_consistency"] not in ("consistent", "mixed"):
+          return False, f"Invalid group_consistency: {data['group_consistency']}"
+      if data["feedback_status"] not in ("included", "not_applicable"):
+          return False, f"Invalid feedback_status: {data['feedback_status']}"
+      if not isinstance(data["collections"], list):
+          return False, "collections must be an array"
+      if not isinstance(data["references"], list):
+          return False, "references must be an array"
+      if not isinstance(data["resources_used"], dict):
+          return False, "resources_used must be an object"
+      for key in ("agent_docs", "skills", "tools"):
+          if key not in data["resources_used"]:
+              return False, f"resources_used missing '{key}'"
+
+      return True, "finding.json passes schema validation"
+
+  - name: required_sections
+    description: |
+      Check that error-overview.md and root-cause.md exist and are
+      non-empty (minimum 50 characters each).
+    check: |
+      import glob as g
+      import os
+
+      sections_dirs = g.glob("**/sections", root_dir=os.getcwd(), recursive=True)
+      if not sections_dirs:
+          return False, "No sections/ directory found"
+
+      sections_dir = sections_dirs[0]
+      required = {
+          "error-overview.md": 50,
+          "root-cause.md": 50,
+      }
+      for filename, min_len in required.items():
+          path = os.path.join(sections_dir, filename)
+          if not os.path.exists(path):
+              return False, f"Missing {filename}"
+          with open(path) as f:
+              content = f.read()
+          if len(content.strip()) < min_len:
+              return False, f"{filename} too short ({len(content.strip())} chars, need {min_len})"
+
+      return True, "Required section files present and non-empty"
+
+  - name: confidence_appropriate
+    description: |
+      Check that the confidence level matches the expected level from
+      annotations (exact match or adjacent level).
+    check: |
+      import json
+      import glob as g
+      import os
+
+      findings = g.glob("**/finding.json", root_dir=os.getcwd(), recursive=True)
+      if findings:
+          with open(findings[0]) as f:
+              data = json.load(f)
+      else:
+          findings_content = outputs.get("main_content", "")
+          if not findings_content.strip():
+              return False, "No finding.json found"
+          data = json.loads(findings_content)
+
+      expected = annotations.get("confidence_expected")
+      if not expected:
+          return True, f"Confidence: {data.get('confidence', 'unknown')} (no expectation)"
+
+      actual = data.get("confidence", "")
+      levels = ["low", "medium", "high"]
+      if actual == expected:
+          return True, f"Confidence matches: {actual}"
+      if actual in levels and expected in levels:
+          diff = abs(levels.index(actual) - levels.index(expected))
+          if diff <= 1:
+              return True, f"Confidence {actual} (expected {expected}, adjacent)"
+      return False, f"Confidence {actual} but expected {expected}"
+
+  - name: resolution_consistency
+    description: |
+      Check that has_resolution_file in finding.json matches whether
+      resolution.md actually exists, and matches the case expectation.
+    check: |
+      import json
+      import glob as g
+      import os
+
+      findings = g.glob("**/finding.json", root_dir=os.getcwd(), recursive=True)
+      if findings:
+          with open(findings[0]) as f:
+              data = json.load(f)
+      else:
+          findings_content = outputs.get("main_content", "")
+          if not findings_content.strip():
+              return False, "No finding.json found"
+          data = json.loads(findings_content)
+
+      has_flag = data.get("has_resolution_file", False)
+      expected = annotations.get("has_resolution")
+      if expected is not None and has_flag != expected:
+          return False, f"has_resolution_file={has_flag}, expected {expected}"
+      resolution_files = g.glob("**/sections/resolution.md", root_dir=os.getcwd(), recursive=True)
+      has_file = bool(resolution_files) and os.path.getsize(resolution_files[0]) > 10
+
+      if has_flag and not has_file:
+          return False, "has_resolution_file=true but no resolution.md"
+      if not has_flag and has_file:
+          return False, "resolution.md exists but has_resolution_file=false"
+      return True, f"Resolution consistency: flag={has_flag}, file_exists={has_file}"
+
+  - name: analysis_quality
+    description: |
+      LLM judge evaluating overall quality of the root cause analysis.
+      Scores 1-5 based on diagnostic accuracy, evidence use, section
+      quality, and finding completeness.
+    prompt_file: eval/prompts/analysis-quality-judge.md
+
+thresholds:
+  finding_schema:
+    min_pass_rate: 1.0
+  required_sections:
+    min_pass_rate: 1.0
+  confidence_appropriate:
+    min_pass_rate: 0.8
+  resolution_consistency:
+    min_pass_rate: 1.0
+  analysis_quality:
+    min_mean: 3.5

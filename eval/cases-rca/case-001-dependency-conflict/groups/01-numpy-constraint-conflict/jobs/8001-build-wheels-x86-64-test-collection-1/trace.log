@@ -1,0 +1,77 @@
+Running with gitlab-runner 16.11.1 (f5da3c5a)
+  on qe-rhel-x86-64-03 zGk2xR9w, system ID: r_X9vMk2JhLpT4
+Resolving secrets                                  00:00
+Preparing the "docker" executor                    00:03
+Using Docker executor with image registry.redhat.io/rhai/wheels-builder:latest ...
+Pulling docker image registry.redhat.io/rhai/wheels-builder:latest ...
+Using docker image sha256:a4e7b2c1d9f83e6a5b0c4d7f2e1a9b8c3d6e5f4a7b0c9d8e1f2a3b4c5d6e7f8a ...
+
+[2026-07-07T02:05:12Z] Step 1/8 : Preparing environment
+$ export COLLECTION=test-collection-1
+$ export ARCH=x86_64
+$ export PYTHON_VERSION=3.11
+$ export BUILD_ID=8001
+$ echo "Building wheels for ${COLLECTION} on ${ARCH}"
+Building wheels for test-collection-1 on x86_64
+$ python --version
+Python 3.11.9
+
+[2026-07-07T02:05:15Z] Step 2/8 : Restoring cache
+Checking cache for build-wheels-test-collection-1-x86_64...
+Successfully extracted cache (312 packages cached)
+
+[2026-07-07T02:05:28Z] Step 3/8 : Loading build configuration
+$ fromager config load --collection ${COLLECTION} --arch ${ARCH}
+Collection: test-collection-1
+Requirements file: requirements.txt (312 packages)
+Constraints file: core/constraints/x86_64.txt (287 constraints)
+Build order: sequential (dependency-aware)
+Parallelism: 4 workers
+
+[2026-07-07T02:05:31Z] Step 4/8 : Resolving dependencies
+$ fromager resolve --requirements requirements.txt --constraints core/constraints/x86_64.txt
+Resolving 312 requirements against 287 constraints...
+Resolved 298 packages in dependency order
+Build plan: 298 packages, estimated 45 minutes
+
+[2026-07-07T02:05:44Z] Step 5/8 : Building wheels
+$ fromager wheels build --plan resolved-plan.json --workers 4
+[1/298] Building wheel for packaging==24.1 ... done (2.1s)
+[2/298] Building wheel for setuptools==72.1.0 ... done (4.3s)
+[3/298] Building wheel for wheel==0.44.0 ... done (1.8s)
+[4/298] Building wheel for flit-core==3.9.0 ... done (1.5s)
+[5/298] Building wheel for cython==3.0.10 ... done (48.2s)
+[6/298] Building wheel for numpy==1.26.4 ...
+  Downloading numpy-1.26.4.tar.gz (15.8 MB)
+  Installing build dependencies ...
+  Collecting numpy>=2.0.0 (from constraints: core/constraints/x86_64.txt)
+    Using cached numpy-2.1.0-cp311-cp311-manylinux_2_17_x86_64.whl
+  Requirement already specified: numpy==1.26.4 (from requirements.txt)
+  ERROR: Cannot install numpy==1.26.4 because these package versions have conflicting dependencies.
+  ResolutionImpossible: for help visit https://pip.pypa.io/en/latest/topics/dependency-resolution/
+
+  The conflict is caused by:
+      The user requested numpy==1.26.4
+      The constraint file requires numpy>=2.0.0
+
+  pip subprocess to install requirements (from constraints) did not run successfully.
+    exit code: 1
+  ERROR fromager.wheels: Failed to build wheel for numpy==1.26.4 from source
+  CRITICAL fromager.wheels: Build failed — aborting remaining builds for test-collection-1
+
+[2026-07-07T02:10:18Z] Step 6/8 : Collecting artifacts
+WARNING: No wheels produced — build failed before completion
+Collected 5 wheels from successful builds (of 298 planned)
+
+[2026-07-07T02:10:20Z] Step 7/8 : Uploading artifacts
+Uploading artifacts for failed job...
+Uploading artifacts to coordinator... 201 Created
+Uploaded 5 wheel artifacts (18.4 MB)
+Uploaded build log (342 KB)
+
+[2026-07-07T02:10:52Z] Step 8/8 : Cleanup
+Cleaning up project directory and file based variables
+Removing docker volumes...
+
+Job failed: exit code 1
+Job duration: 00:05:42

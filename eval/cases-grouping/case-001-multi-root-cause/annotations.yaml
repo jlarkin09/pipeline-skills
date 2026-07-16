@@ -1,0 +1,12 @@
+difficulty: medium
+expected_group_count: 3
+expected_jobs: "8001,8002,8003,8004,8005,8006"
+tests_boundary_crossing: false
+has_cascade: true
+expected_grouping:
+  - root_cause: "numpy version constraint conflict"
+    job_ids: ["8001", "8002"]
+  - root_cause: "missing jsonschema module"
+    job_ids: ["8003", "8006"]
+  - root_cause: "cascade from build failure - no artifacts"
+    job_ids: ["8004", "8005"]

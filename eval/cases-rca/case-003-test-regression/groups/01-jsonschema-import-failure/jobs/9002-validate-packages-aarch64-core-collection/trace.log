@@ -1,0 +1,47 @@
+Running with gitlab-runner 16.11.1 (f5da3c5a)
+  on qe-rhel-aarch64-02 rTn6wK4x, system ID: r_B2mQ7pVn5aJ9
+Resolving secrets                                  00:00
+Preparing the "docker" executor                    00:02
+Using Docker executor with image registry.redhat.io/rhai/validation:latest ...
+Pulling docker image registry.redhat.io/rhai/validation:latest ...
+Using docker image sha256:e1f3a5b7c9d2046e8a0c2d4f6b8e0a3c5d7f1b9e2a4c6d8f0b3a5c7e9d1f3b5a ...
+
+[2026-07-07T02:45:03Z] Step 1/5 : Preparing environment
+$ export COLLECTION=core-collection
+$ export ARCH=aarch64
+$ export PYTHON_VERSION=3.11
+$ export BUILD_ID=9002
+$ echo "Validating packages for ${COLLECTION} on ${ARCH}"
+Validating packages for core-collection on aarch64
+$ python --version
+Python 3.11.9
+
+[2026-07-07T02:45:06Z] Step 2/5 : Installing validation dependencies
+$ pip install -r ci-requirements.txt --quiet
+Requirement already satisfied: pyyaml==6.0.2 in /usr/local/lib/python3.11/site-packages
+Requirement already satisfied: packaging==24.1 in /usr/local/lib/python3.11/site-packages
+Requirement already satisfied: requests==2.32.3 in /usr/local/lib/python3.11/site-packages
+
+[2026-07-07T02:45:12Z] Step 3/5 : Downloading build artifacts
+$ download-artifacts --job 8802 --collection ${COLLECTION} --arch ${ARCH}
+Downloading wheel artifacts from job 8802...
+Downloaded 127 wheels (2.1 GB) to /workspace/artifacts/wheels/
+
+[2026-07-07T02:45:43Z] Step 4/5 : Running package validation
+$ python /workspace/core/scripts/validate-packages.py --collection ${COLLECTION} --arch ${ARCH} --wheels-dir /workspace/artifacts/wheels/
+Traceback (most recent call last):
+  File "/workspace/core/scripts/validate-packages.py", line 8, in <module>
+    import jsonschema
+    ^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'jsonschema'
+
+ERROR: Package validation script failed with exit code 1
+ERROR: validate-packages step failed for core-collection (aarch64)
+
+[2026-07-07T02:45:53Z] Step 5/5 : Cleanup
+Cleaning up project directory and file based variables
+Uploading artifacts for failed job...
+Uploading artifacts to coordinator... 201 Created
+
+Job failed: exit code 1
+Job duration: 00:00:52

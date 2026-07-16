@@ -1,0 +1,9 @@
+2025-07-06T03:30:17Z [validate-packages] Running package validation for test-collection-2...
+2025-07-06T03:30:18Z [validate-packages] Loading validation schema...
+2025-07-06T03:30:19Z [python] Traceback (most recent call last):
+2025-07-06T03:30:19Z [python]   File "/workspace/scripts/validate_packages.py", line 8, in <module>
+2025-07-06T03:30:19Z [python]     import jsonschema
+2025-07-06T03:30:19Z [python] ModuleNotFoundError: No module named 'jsonschema'
+2025-07-06T03:30:20Z [validate-packages] Package validation failed with exit code 1
+2025-07-06T03:30:20Z [validate-packages] ERROR: Validation script requires jsonschema module
+2025-07-06T03:30:21Z [pipeline] Job 8006 failed after 52s

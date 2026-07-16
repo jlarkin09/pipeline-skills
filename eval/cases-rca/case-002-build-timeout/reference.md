@@ -1,0 +1,5 @@
+The root cause is that the torch wheel compilation exceeded the job's maximum allowed duration of 3600 seconds. The ninja build was processing 5312 compilation targets and had only completed approximately 2490 of them (47%) when the runner terminated the job. The build was progressing normally — no compilation errors occurred — but the sheer volume of C++ and CUDA compilation targets combined with the runner's available resources was insufficient to complete within the time limit.
+
+This is an infrastructure capacity issue rather than a code defect. The torch build requires compiling thousands of C++ and CUDA source files, which is inherently time-consuming. The confidence is medium because while the timeout is clear from the logs, the underlying cause could be either insufficient runner resources (CPU/memory) or a regression in the build configuration that increased the number of compilation targets.
+
+No code fix is applicable — this requires either increasing the job timeout, using a more powerful runner, or enabling build caching to skip previously compiled objects.

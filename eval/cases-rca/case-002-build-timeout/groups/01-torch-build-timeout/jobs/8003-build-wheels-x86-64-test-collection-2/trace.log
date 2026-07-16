@@ -1,0 +1,90 @@
+Running with gitlab-runner 16.11.1 (f5da3c5a)
+  on qe-rhel-x86-64-07 wRt5kN3m, system ID: r_V7nP4qLm8xK2
+Resolving secrets                                  00:00
+Preparing the "docker" executor                    00:03
+Using Docker executor with image registry.redhat.io/rhai/wheels-builder:latest ...
+Pulling docker image registry.redhat.io/rhai/wheels-builder:latest ...
+Using docker image sha256:a4e7b2c1d9f83e6a5b0c4d7f2e1a9b8c3d6e5f4a7b0c9d8e1f2a3b4c5d6e7f8a ...
+
+[2026-07-07T04:05:08Z] Step 1/8 : Preparing environment
+$ export COLLECTION=test-collection-2
+$ export ARCH=x86_64
+$ export PYTHON_VERSION=3.11
+$ export BUILD_ID=8003
+$ echo "Building wheels for ${COLLECTION} on ${ARCH}"
+Building wheels for test-collection-2 on x86_64
+$ python --version
+Python 3.11.9
+
+[2026-07-07T04:05:11Z] Step 2/8 : Restoring cache
+Checking cache for build-wheels-test-collection-2-x86_64...
+Successfully extracted cache (142 packages cached)
+
+[2026-07-07T04:05:24Z] Step 3/8 : Loading build configuration
+$ fromager config load --collection ${COLLECTION} --arch ${ARCH}
+Collection: test-collection-2
+Requirements file: requirements.txt (142 packages)
+Constraints file: core/constraints/x86_64.txt (84 constraints)
+Build order: sequential (dependency-aware)
+Parallelism: 4 workers
+Note: torch==2.4.1 requires source build (no compatible binary wheel)
+
+[2026-07-07T04:05:27Z] Step 4/8 : Resolving dependencies
+$ fromager resolve --requirements requirements.txt --constraints core/constraints/x86_64.txt
+Resolving 142 requirements against 84 constraints...
+Resolved 387 packages in dependency order (including transitive dependencies)
+Build plan: 387 packages, estimated 180 minutes
+WARNING: torch==2.4.1 source build expected — long compilation time
+
+[2026-07-07T04:05:39Z] Step 5/8 : Building wheels
+$ fromager wheels build --plan resolved-plan.json --workers 4
+[1/387] Building wheel for packaging==24.1 ... done (2.1s)
+[2/387] Building wheel for setuptools==72.1.0 ... done (4.2s)
+[3/387] Building wheel for wheel==0.44.0 ... done (1.9s)
+[4/387] Building wheel for numpy==2.0.2 ... done (127.4s)
+[5/387] Building wheel for pyyaml==6.0.2 ... done (8.3s)
+[6/387] Building wheel for markupsafe==2.1.5 ... done (3.7s)
+[7/387] Building wheel for torch==2.4.1 ...
+  Downloading torch-2.4.1.tar.gz (389.7 MB)
+  Unpacking source archive...
+  Installing build dependencies: cmake, ninja, pyyaml, typing-extensions
+  Running setup.py bdist_wheel for torch ...
+  -- CMake configuration:
+  --   CUDA: 12.4 (/usr/local/cuda-12.4)
+  --   cuDNN: 9.1.0
+  --   NCCL: 2.21.5
+  --   Architecture list: 7.0;7.5;8.0;8.6;8.9;9.0
+  --   BUILD_CAFFE2: ON
+  --   USE_DISTRIBUTED: ON
+  --   USE_FBGEMM: ON
+  -- Configuring done (42.3s)
+  -- Generating done (3.1s)
+  -- Build files have been written to: /tmp/pip-build-torch/build
+  [2026-07-07T04:08:51Z] ninja: Starting build with 5312 targets
+  [1/5312] Building CXX object caffe2/CMakeFiles/torch_cpu.dir/core/TensorBody.cpp.o
+  [48/5312] Building CXX object caffe2/CMakeFiles/torch_cpu.dir/core/aten_interned_strings.cpp.o
+  [152/5312] Building CUDA object caffe2/CMakeFiles/torch_cuda.dir/aten/src/ATen/native/cuda/Activation.cu.o
+  [389/5312] Building CXX object caffe2/CMakeFiles/torch_cpu.dir/aten/src/ATen/native/cpu/BinaryOpsKernel.cpp.o
+  [724/5312] Building CUDA object caffe2/CMakeFiles/torch_cuda.dir/aten/src/ATen/native/cuda/IndexKernel.cu.o
+  [1102/5312] Building CXX object caffe2/CMakeFiles/torch_cpu.dir/aten/src/ATen/native/LinearAlgebra.cpp.o
+  [1567/5312] Building CUDA object caffe2/CMakeFiles/torch_cuda.dir/aten/src/ATen/native/cuda/Normalization.cu.o
+  [1948/5312] Building CXX object caffe2/CMakeFiles/torch_cpu.dir/aten/src/ATen/native/Convolution.cpp.o
+  [2201/5312] Building CUDA object caffe2/CMakeFiles/torch_cuda.dir/aten/src/ATen/native/cuda/LossCTC.cu.o
+  [2480/5312] Building CXX object caffe2/CMakeFiles/torch_cpu.dir/serialize/inline_container.cc.o
+  [2481/5312] Building CXX object caffe2/CMakeFiles/torch_cpu.dir/serialize/read_adapter_interface.cc.o
+  [2482/5312] Building CXX object caffe2/CMakeFiles/torch_cpu.dir/serialize/istream_adapter.cc.o
+  [2483/5312] Building CXX object caffe2/CMakeFiles/torch_cpu.dir/core/dispatch/OperatorEntry.cpp.o
+  [2484/5312] Building CXX object caffe2/CMakeFiles/torch_cpu.dir/core/dispatch/Dispatcher.cpp.o
+  [2485/5312] Building CXX object caffe2/CMakeFiles/torch_cpu.dir/core/boxing/KernelFunction.cpp.o
+  [2486/5312] Building CXX object caffe2/CMakeFiles/torch_cpu.dir/core/ATenOpTable.cpp.o
+  [2487/5312] Building CXX object caffe2/CMakeFiles/torch_cpu.dir/core/PythonOpRegistrationTrampoline.cpp.o
+  [2488/5312] Building CXX object caffe2/CMakeFiles/torch_cpu.dir/core/GeneratorForPrivateuseone.cpp.o
+  [2489/5312] Building CXX object caffe2/CMakeFiles/torch_cpu.dir/core/impl/alloc_cpu.cpp.o
+  [2490/5312] Building CXX object caffe2/CMakeFiles/torch_cpu.dir/core/impl/DeviceGuardImplInterface.cpp.o
+  [2026-07-07T05:05:08Z] ninja: build stopped: timeout.
+
+ERROR: Job exceeded maximum allowed duration (3600 seconds)
+ERROR: Job failed (system failure): runner terminated job due to timeout
+
+Job failed: execution took longer than 1h0m0s
+Job duration: 01:00:00

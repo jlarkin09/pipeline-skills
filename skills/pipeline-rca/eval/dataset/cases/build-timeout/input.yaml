@@ -1,5 +1,0 @@
-prompt: "/pipeline-rca"
-group_id: "01-torch-build-timeout"
-expected_confidence: medium
-expected_root_cause: "torch compilation exceeded job timeout of 3600 seconds, likely due to resource constraints on the runner or build configuration regression"
-expected_has_resolution: false
