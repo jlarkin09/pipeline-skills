@@ -10,5 +10,4 @@ L46: ERROR pip :     The constraint file requires numpy>=2.0.0
 L47: ERROR pip :
 L48: ERROR pip : pip subprocess to install requirements (from constraints) did not run successfully.
 L49: ERROR pip :   exit code: 1
-L50: ERROR fromager.wheels : Failed to build wheel for numpy==1.26.4 from source
-L51: CRITICAL fromager.wheels : Build failed — aborting remaining builds for test-collection-1
+L50: CRITICAL fromager.wheels : Build failed — aborting remaining builds for test-collection-1
