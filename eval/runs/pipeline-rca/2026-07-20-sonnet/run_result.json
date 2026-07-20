@@ -1,0 +1,111 @@
+{
+  "exit_code": 0,
+  "duration_s": 1200.2,
+  "wall_clock_s": 1200.3,
+  "cost_usd": 3.97,
+  "token_usage": {
+    "input": 1268,
+    "output": 68088,
+    "cache_read": 7062675,
+    "cache_create": 220880
+  },
+  "num_turns": 110,
+  "per_model_usage": {
+    "claude-sonnet-4-6": {
+      "input": 1268,
+      "output": 68088,
+      "cache_read": 7062675,
+      "cache_create": 220880,
+      "cost_usd": 3.9722265
+    }
+  },
+  "per_model_turns": {
+    "claude-sonnet-4-6": 110
+  },
+  "num_cases": 3,
+  "model": "claude-sonnet-4-6",
+  "agent": "claude-code",
+  "agent_version": "2.1.215 (Claude Code)",
+  "execution_mode": "case",
+  "eval_params": {
+    "execution_mode": "case",
+    "max_budget_usd": 100.0,
+    "timeout_s": 900,
+    "skill": "pipeline-rca",
+    "skill_args": "{{ input.prompt }}"
+  },
+  "per_case": {
+    "case-001-transient-network-failure": {
+      "exit_code": 0,
+      "duration_s": 259.8,
+      "token_usage": {
+        "input": 413,
+        "output": 14458,
+        "cache_read": 1502010,
+        "cache_create": 53551
+      },
+      "cost_usd": 0.8695282499999998,
+      "num_turns": 27,
+      "per_model_usage": {
+        "claude-sonnet-4-6": {
+          "input": 413,
+          "output": 14458,
+          "cache_read": 1502010,
+          "cache_create": 53551,
+          "cost_usd": 0.8695282499999998
+        }
+      },
+      "per_model_turns": {
+        "claude-sonnet-4-6": 27
+      }
+    },
+    "case-002-transformers-constraint-conflict": {
+      "exit_code": 0,
+      "duration_s": 481.3,
+      "token_usage": {
+        "input": 424,
+        "output": 27269,
+        "cache_read": 2519996,
+        "cache_create": 75059
+      },
+      "cost_usd": 1.44777705,
+      "num_turns": 38,
+      "per_model_usage": {
+        "claude-sonnet-4-6": {
+          "input": 424,
+          "output": 27269,
+          "cache_read": 2519996,
+          "cache_create": 75059,
+          "cost_usd": 1.44777705
+        }
+      },
+      "per_model_turns": {
+        "claude-sonnet-4-6": 38
+      }
+    },
+    "case-003-pymilvus-release-age": {
+      "exit_code": 0,
+      "duration_s": 459.1,
+      "token_usage": {
+        "input": 431,
+        "output": 26361,
+        "cache_read": 3040669,
+        "cache_create": 92270
+      },
+      "cost_usd": 1.6549212000000004,
+      "num_turns": 45,
+      "per_model_usage": {
+        "claude-sonnet-4-6": {
+          "input": 431,
+          "output": 26361,
+          "cache_read": 3040669,
+          "cache_create": 92270,
+          "cost_usd": 1.6549212000000004
+        }
+      },
+      "per_model_turns": {
+        "claude-sonnet-4-6": 45
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "case-001-transient-network-failure": {
+    "groups": 4,
+    "_modified": 2
+  },
+  "case-002-transformers-constraint-conflict": {
+    "_modified": 2
+  },
+  "case-003-pymilvus-release-age": {
+    "groups": 5,
+    "_modified": 2
+  }
+}

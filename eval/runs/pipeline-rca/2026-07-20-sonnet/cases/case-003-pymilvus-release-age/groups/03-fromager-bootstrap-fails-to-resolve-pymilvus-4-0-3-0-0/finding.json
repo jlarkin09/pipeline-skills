@@ -1,0 +1,40 @@
+{
+  "group_id": "03-fromager-bootstrap-fails-to-resolve-pymilvus-4-0-3-0-0",
+  "title": "langchain-milvus 0.4.0 requires pymilvus 3.x; all matching releases blocked by release-age cooldown",
+  "collections": ["rhai"],
+  "actions": ["bootstrap-and-onboard"],
+  "error_summary": "Fromager cannot resolve pymilvus<4.0,>=3.0.0 (dependency of langchain-milvus 0.4.0): all candidates published within 3-day cooldown window (oldest is 2 days old)",
+  "suggested_resolution_summary": "Wait ~1 day for cooldown to clear and re-run, or pin langchain-milvus to 0.3.3 in collection constraints to avoid pymilvus 3.x until ready",
+  "has_resolution_file": true,
+  "confidence": "high",
+  "confidence_justification": "The x86_64 error message directly states the cause: 2 pymilvus candidates found for <4.0,>=3.0.0 but all rejected by the 3-day release-age cooldown (oldest is 2 days old). The aarch64 error ('no match found searching for sdists') is consistent with the same root cause under a different resolver code path or timing. Cross-job consistency confirms the failure is systematic, not transient. PyPI confirms langchain-milvus 0.4.0 (released 2026-07-17) requires pymilvus<4.0,>=3.0.0, and this is the first version to require pymilvus 3.x.",
+  "cascade": false,
+  "target_repo": "https://gitlab.com/redhat/rhel-ai/rhai/pipeline",
+  "target_repo_reason": "The fix (pinning langchain-milvus or adding a pymilvus constraint) lives in the collection constraints files under collections/rhai/*/constraints.txt, which are in the pipeline repository.",
+  "group_consistency": "mixed",
+  "feedback_status": "included",
+  "references": [
+    {
+      "path": "collections/rhai/cpu-ubi9/requirements/team-notebooks-images.txt",
+      "description": "Contains the unversioned langchain-milvus entry (AIPCC-10403) that caused fromager to resolve to version 0.4.0."
+    },
+    {
+      "path": "collections/rhai/cpu-ubi9/constraints.txt",
+      "description": "Checked for existing pymilvus or langchain-milvus constraints; none found, confirming no prior pin was in place."
+    }
+  ],
+  "resources_used": {
+    "agent_docs": [],
+    "skills": [],
+    "tools": [
+      {
+        "name": "PyPI JSON API",
+        "description": "Queried PyPI for langchain-milvus and pymilvus release histories to confirm version dates and dependency requirements for langchain-milvus 0.4.0."
+      },
+      {
+        "name": "glab API (GitLab repository search and file reads)",
+        "description": "Used to read collection requirements and constraints files at the pipeline SHA, and to search the repository for all langchain-milvus and pymilvus references."
+      }
+    ]
+  }
+}
