@@ -1,9 +1,0 @@
-2025-07-06T03:22:41Z [build-wheels] Installing test-collection-2 dependencies...
-2025-07-06T03:22:42Z [build-wheels] Running validation scripts...
-2025-07-06T03:22:43Z [python] Traceback (most recent call last):
-2025-07-06T03:22:43Z [python]   File "/workspace/scripts/validate_deps.py", line 12, in <module>
-2025-07-06T03:22:43Z [python]     import jsonschema
-2025-07-06T03:22:43Z [python] ModuleNotFoundError: No module named 'jsonschema'
-2025-07-06T03:22:44Z [build-wheels] Dependency validation failed with exit code 1
-2025-07-06T03:22:44Z [build-wheels] ERROR: Cannot proceed with build — required validation module missing
-2025-07-06T03:22:45Z [pipeline] Job 8003 failed after 87s

@@ -1,5 +1,0 @@
-{
-  "job_manifest": "| Job ID | Job Name | Collection | Action | Errors File |\n|--------|----------|------------|--------|-------------|\n| 8001 | build-wheels-x86-64-test-collection-1 | test-collection-1 | build-wheels | jobs/8001-build-wheels-x86-64-test-collection-1/errors.txt |\n| 8002 | build-wheels-aarch64-test-collection-1 | test-collection-1 | build-wheels | jobs/8002-build-wheels-aarch64-test-collection-1/errors.txt |\n| 8003 | build-wheels-x86-64-test-collection-2 | test-collection-2 | build-wheels | jobs/8003-build-wheels-x86-64-test-collection-2/errors.txt |\n| 8004 | release-tarball-x86-64-test-collection-1 | test-collection-1 | release-tarball | jobs/8004-release-tarball-x86-64-test-collection-1/errors.txt |\n| 8005 | release-tarball-aarch64-test-collection-1 | test-collection-1 | release-tarball | jobs/8005-release-tarball-aarch64-test-collection-1/errors.txt |\n| 8006 | validate-packages-x86-64-test-collection-2 | test-collection-2 | validate-packages | jobs/8006-validate-packages-x86-64-test-collection-2/errors.txt |",
-  "expected_jobs": "8001,8002,8003,8004,8005,8006",
-  "jira_url": "https://redhat.atlassian.net"
-}

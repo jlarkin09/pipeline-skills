@@ -1,9 +1,0 @@
-[Fallback: last 200 lines of cleaned log]
-2025-07-06T03:45:02Z [release-tarball] Checking for upstream build artifacts...
-2025-07-06T03:45:03Z [release-tarball] Looking for wheels from job build-wheels-x86-64-test-collection-1 (8001)...
-2025-07-06T03:45:03Z [release-tarball] WARNING: Upstream job 8001 status: FAILED
-2025-07-06T03:45:04Z [release-tarball] ERROR: No artifacts found for upload. Build step failed, skipping release.
-2025-07-06T03:45:04Z [release-tarball] Expected artifacts at: /workspace/artifacts/test-collection-1/x86_64/*.whl
-2025-07-06T03:45:05Z [release-tarball] Found 0 files matching pattern
-2025-07-06T03:45:05Z [release-tarball] Cannot proceed with release — upstream build must succeed first
-2025-07-06T03:45:06Z [pipeline] Job 8004 failed after 34s

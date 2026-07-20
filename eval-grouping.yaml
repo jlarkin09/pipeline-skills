@@ -19,6 +19,7 @@ models:
 
 dataset:
   path: eval/cases-grouping
+  # Case 001 uses real artifacts from pipeline #2689294783 (3.5-stable nightly)
   schema: |
     Each case directory contains:
     - input.yaml: The 'prompt' field is the skill invocation command.

@@ -1,5 +1,0 @@
-{
-  "job_manifest": "| Job ID | Job Name | Collection | Action | Errors File |\n|--------|----------|------------|--------|-------------|\n| 9001 | build-wheels-x86-64-core-collection | core-collection | build-wheels | jobs/9001-build-wheels-x86-64-core-collection/errors.txt |\n| 9002 | build-wheels-aarch64-core-collection | core-collection | build-wheels | jobs/9002-build-wheels-aarch64-core-collection/errors.txt |\n| 9003 | build-wheels-x86-64-extended-collection | extended-collection | build-wheels | jobs/9003-build-wheels-x86-64-extended-collection/errors.txt |\n| 9004 | build-wheels-aarch64-extended-collection | extended-collection | build-wheels | jobs/9004-build-wheels-aarch64-extended-collection/errors.txt |",
-  "expected_jobs": "9001,9002,9003,9004",
-  "jira_url": "https://redhat.atlassian.net"
-}

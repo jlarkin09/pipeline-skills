@@ -1,8 +1,0 @@
-L42: Traceback (most recent call last):
-L43:   File "/workspace/core/scripts/validate-packages.py", line 8, in <module>
-L44:     import jsonschema
-L45:     ^^^^^^^^^^^^^^^^^^^
-L46: ModuleNotFoundError: No module named 'jsonschema'
-L47:
-L48: ERROR: Package validation script failed with exit code 1
-L49: ERROR: validate-packages step failed for core-collection (aarch64)

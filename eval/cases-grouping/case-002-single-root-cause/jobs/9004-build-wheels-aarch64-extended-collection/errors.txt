@@ -1,8 +1,0 @@
-2025-07-06T02:21:30Z [build-wheels] Installing dependencies for extended-collection...
-2025-07-06T02:21:31Z [pip] ERROR: pip's dependency resolver does not currently take into account all the packages that are installed.
-2025-07-06T02:21:31Z [pip]   Package 'transformers' requires 'tokenizers>=0.20,<0.21' but version 0.19.1 is installed.
-2025-07-06T02:21:32Z [pip] ERROR: Cannot install tokenizers==0.19.1 and transformers>=4.44.0 simultaneously
-2025-07-06T02:21:32Z [pip]   transformers 4.44.2 requires tokenizers>=0.20,<0.21
-2025-07-06T02:21:33Z [build-wheels] pip install failed with exit code 1
-2025-07-06T02:21:33Z [build-wheels] Failed to build wheels for extended-collection (aarch64)
-2025-07-06T02:21:34Z [pipeline] Job 9004 failed after 211s
