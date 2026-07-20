@@ -20,119 +20,23 @@ on:
 
 jobs:
   eval-grouping:
-    runs-on: ubuntu-latest
     if: inputs.skill == '' || inputs.skill == 'pipeline-grouping'
-    permissions:
-      contents: read
-    env:
+    uses: ./.github/workflows/eval-skill.yml
+    with:
+      skill: pipeline-grouping
+      config: eval-grouping.yaml
+      model: ${{ inputs.model || 'sonnet' }}
+      runs: ${{ inputs.runs || '1' }}
+    secrets:
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-
-    steps:
-    - name: Validate inputs
-      env:
-        EVAL_RUNS: ${{ inputs.runs }}
-      run: |
-        if ! echo "$EVAL_RUNS" | grep -qE '^[1-9][0-9]?$'; then
-          echo "::error::runs must be a positive integer (1-99)"
-          exit 1
-        fi
-
-    - name: Checkout code
-      uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
-      with:
-        persist-credentials: false
-
-    - name: Set up Python
-      uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6
-      with:
-        python-version: '3.13'
-
-    - name: Install uv
-      uses: astral-sh/setup-uv@fac544c07dec837d0ccb6301d7b5580bf5edae39 # v8.2.0
-      with:
-        enable-cache: true
-
-    - name: Install eval harness
-      run: |
-        uv pip install --system pyyaml
-        git clone --depth 1 https://github.com/opendatahub-io/agent-eval-harness /tmp/eval-harness
-        uv pip install --system -e /tmp/eval-harness
-
-    - name: Install Claude Code
-      run: npm install -g @anthropic-ai/claude-code
-
-    - name: Run pipeline-grouping eval
-      env:
-        EVAL_MODEL: ${{ inputs.model || 'sonnet' }}
-        EVAL_RUNS: ${{ inputs.runs || '1' }}
-      run: |
-        echo "/eval-run --config eval-grouping.yaml --model $EVAL_MODEL --runs $EVAL_RUNS" | \
-          claude --print --plugin-dir /tmp/eval-harness
-      timeout-minutes: 45
-
-    - name: Upload eval results
-      if: always()
-      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-      with:
-        name: eval-results-grouping
-        path: eval/runs/
-        if-no-files-found: ignore
 
   eval-rca:
-    runs-on: ubuntu-latest
     if: inputs.skill == '' || inputs.skill == 'pipeline-rca'
-    permissions:
-      contents: read
-    env:
+    uses: ./.github/workflows/eval-skill.yml
+    with:
+      skill: pipeline-rca
+      config: eval-rca.yaml
+      model: ${{ inputs.model || 'sonnet' }}
+      runs: ${{ inputs.runs || '1' }}
+    secrets:
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-
-    steps:
-    - name: Validate inputs
-      env:
-        EVAL_RUNS: ${{ inputs.runs }}
-      run: |
-        if ! echo "$EVAL_RUNS" | grep -qE '^[1-9][0-9]?$'; then
-          echo "::error::runs must be a positive integer (1-99)"
-          exit 1
-        fi
-
-    - name: Checkout code
-      uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
-      with:
-        persist-credentials: false
-
-    - name: Set up Python
-      uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6
-      with:
-        python-version: '3.13'
-
-    - name: Install uv
-      uses: astral-sh/setup-uv@fac544c07dec837d0ccb6301d7b5580bf5edae39 # v8.2.0
-      with:
-        enable-cache: true
-
-    - name: Install eval harness
-      run: |
-        uv pip install --system pyyaml
-        git clone --depth 1 https://github.com/opendatahub-io/agent-eval-harness /tmp/eval-harness
-        uv pip install --system -e /tmp/eval-harness
-
-    - name: Install Claude Code
-      run: npm install -g @anthropic-ai/claude-code
-
-    - name: Run pipeline-rca eval
-      env:
-        EVAL_MODEL: ${{ inputs.model || 'sonnet' }}
-        EVAL_RUNS: ${{ inputs.runs || '1' }}
-      run: |
-        echo "/eval-run --config eval-rca.yaml --model $EVAL_MODEL --runs $EVAL_RUNS" | \
-          claude --print --plugin-dir /tmp/eval-harness
-      timeout-minutes: 45
-
-    - name: Upload eval results
-      if: always()
-      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-      with:
-        name: eval-results-rca
-        path: eval/runs/
-        if-no-files-found: ignore
