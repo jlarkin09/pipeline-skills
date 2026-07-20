@@ -1,0 +1,51 @@
+judges:
+  all_jobs_assigned:
+    mean: 0.0
+    pass_rate: 0.0
+  group_count:
+    mean: 0.0
+    pass_rate: 0.0
+  group_structure:
+    mean: 0.0
+    pass_rate: 0.0
+  grouping_quality:
+    mean: null
+    pass_rate: null
+  no_duplicate_jobs:
+    mean: 0.0
+    pass_rate: 0.0
+  valid_json:
+    mean: 0.0
+    pass_rate: 0.0
+per_case:
+  case-001-3-5-stable-nightly:
+    all_jobs_assigned:
+      judge_type: check
+      rationale: grouping.json is empty or missing
+      value: false
+    group_count:
+      judge_type: check
+      rationale: grouping.json is empty or missing
+      value: false
+    group_structure:
+      judge_type: check
+      rationale: grouping.json is empty or missing
+      value: false
+    grouping_quality:
+      error: No module named 'jinja2'
+      judge_type: llm
+      value: null
+    no_duplicate_jobs:
+      judge_type: check
+      rationale: grouping.json is empty or missing
+      value: false
+    valid_json:
+      judge_type: check
+      rationale: grouping.json is empty or missing
+      value: false
+run_id: 2026-07-20-sonnet
+run_metrics:
+  cache_hit_rate: 0.936317
+  cost_per_mtok_usd: 0.606
+  cost_per_turn_usd: 0.021429
+  output_tokens_per_turn: 245.0
