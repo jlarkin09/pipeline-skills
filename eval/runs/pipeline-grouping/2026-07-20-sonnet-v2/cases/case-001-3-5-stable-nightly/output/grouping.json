@@ -1,0 +1,39 @@
+{
+  "groups": [
+    {
+      "id": "01-the-pinned-vllm-version-cannot-be-found-in-the-gitlab-tag",
+      "summary": "The pinned vllm version cannot be found in the GitLab tag resolver mirror, causing both the cpu and spyre variants to fail immediately at dependency resolution.",
+      "job_ids": [
+        "15423642483",
+        "15423643434"
+      ],
+      "error_messages": [
+        "Unable to resolve requirement specifier vllm==0.21.0+rhaiv.8 with constraint vllm<0.25.0,>=0.24.0 using GitLab tag resolver (project: https://gitlab.com/redhat/rhel-ai/core/mirrors/github/neuralmagic/nm-vllm-ent): found no match for vllm==0.21.0+rhaiv.8 using GitLab tag resolver (project: https://gitlab.com/redhat/rhel-ai/core/mirrors/github/neuralmagic/nm-vllm-ent) because found no match for vllm==0.21.0+rhaiv.8 using GitLab tag resolver (project: https://gitlab.com/redhat/rhel-ai/core/mirrors/github/neuralmagic/nm-vllm-ent)",
+        "Unable to resolve requirement specifier vllm[tensorizer]==0.20.1+rhaiv.1.spyre with constraint vllm<0.25.0,>=0.24.0 using GitLab tag resolver (project: https://gitlab.com/redhat/rhel-ai/core/mirrors/github/neuralmagic/nm-vllm-ent): found no match for vllm[tensorizer]==0.20.1+rhaiv.1.spyre using GitLab tag resolver (project: https://gitlab.com/redhat/rhel-ai/core/mirrors/github/neuralmagic/nm-vllm-ent) because found no match for vllm[tensorizer]==0.20.1+rhaiv.1.spyre using GitLab tag resolver (project: https://gitlab.com/redhat/rhel-ai/core/mirrors/github/neuralmagic/nm-vllm-ent)"
+      ]
+    },
+    {
+      "id": "02-the-transformers-package-cannot-be-resolved-because-a",
+      "summary": "The transformers package cannot be resolved because a dependency requires transformers>=5.6.0 but a constraint caps it at transformers<5, creating an impossible version range.",
+      "job_ids": [
+        "15424070742",
+        "15424099959"
+      ],
+      "error_messages": [
+        "Unable to resolve requirement specifier transformers>=5.6.0 with constraint transformers<5 using PyPI resolver (searching at https://pypi.org/simple): found no match for transformers>=5.6.0 using PyPI resolver (searching at https://pypi.org/simple), searching for sdists, ignoring pre-release versions because found no match for transformers>=5.6.0 using PyPI resolver (searching at https://pypi.org/simple), searching for sdists, ignoring pre-release versions"
+      ]
+    },
+    {
+      "id": "03-langchain-milvus-dependency-pymilvus-4-0-3-0-0-cannot-be",
+      "summary": "langchain-milvus dependency pymilvus<4.0,>=3.0.0 cannot be resolved: one job found no matching version on PyPI while the other found candidates but all blocked by the release-age cooldown.",
+      "job_ids": [
+        "15424929597",
+        "15425062679"
+      ],
+      "error_messages": [
+        "Unable to resolve requirement specifier pymilvus<4.0,>=3.0.0 with constraint None using PyPI resolver (searching at https://pypi.org/simple): found no match for pymilvus<4.0,>=3.0.0 using PyPI resolver (searching at https://pypi.org/simple), searching for sdists, ignoring pre-release versions because found no match for pymilvus<4.0,>=3.0.0 using PyPI resolver (searching at https://pypi.org/simple), searching for sdists, ignoring pre-release versions",
+        "Unable to resolve requirement specifier pymilvus<4.0,>=3.0.0 with constraint None using PyPI resolver (searching at https://pypi.org/simple): found 2 candidate(s) for pymilvus<4.0,>=3.0.0 but all were published within the last 3 days (release-age cooldown; oldest is 2 day(s) old) because found 2 candidate(s) for pymilvus<4.0,>=3.0.0 but all were published within the last 3 days (release-age cooldown; oldest is 2 day(s) old)"
+      ]
+    }
+  ]
+}
