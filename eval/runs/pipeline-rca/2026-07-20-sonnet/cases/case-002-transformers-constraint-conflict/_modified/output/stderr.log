@@ -1,3 +1,0 @@
-Ignoring 1 permissions.additionalDirectories entry from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/private/var/folders/bs/vb2qfhp512q723z7ph06f0n40000gn/T/agent-eval/2026-07-20-sonnet/cases/case-002-transformers-constraint-conflict"].hasTrustDialogAccepted: true in /Users/jlarkin/.claude.json.
-
-WARNING: 3 permission denial(s) detected during execution
